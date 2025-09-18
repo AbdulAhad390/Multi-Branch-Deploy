@@ -1,0 +1,69 @@
+name: Multi-Branch Deploy (Pages)
+
+on:
+  push:
+    branches: [main, dev] # CI/CD sirf main aur dev branches ke liye
+  pull_request: {} # PRs ke liye sirf CI chalega (deploy nahi)
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci # clean reproducible install
+
+      - name: Run lint
+        run: npm run lint --if-present
+
+      - name: Run tests
+        run: npm test --if-present
+
+      - name: Build project
+        run: |
+          echo "VITE_BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy_qa:
+    needs: ci
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
+    concurrency:
+      group: deploy-qa
+      cancel-in-progress: true
+    steps:
+      - name: Deploy QA Preview
+        run: echo "Deploying QA Preview from dev branch..."
+      - uses: actions/deploy-pages@v4
+        with:
+          preview: true
+
+  deploy_prod:
+    needs: ci
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: true
+    steps:
+      - name: Deploy Production
+        run: echo "Deploying Production site from main branch..."
+      - uses: actions/deploy-pages@v4
