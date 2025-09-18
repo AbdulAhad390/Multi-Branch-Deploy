@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/multi-Branch-Deploy>/",
+  base: "/multi-Branch-Deploy/", 
 });
