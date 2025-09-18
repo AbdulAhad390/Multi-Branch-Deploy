@@ -1,5 +1,5 @@
-
 # 🚀 Multi-Branch Deploy (GitHub Pages + Actions)
+
 
 This repository demonstrates **Continuous Integration (CI)** and **Continuous Deployment (CD)** using **GitHub Actions** with multi-branch support.  
 The project uses **Vite + React** and deploys automatically to **GitHub Pages**.
@@ -63,19 +63,6 @@ npm run dev
 ```bash
 npm run build
 ```
-
----
-
-## 🌐 Deployment
-
-* **Production (main branch)** → Deployed automatically at:
-
-  ```
-  https://abdulahad390.github.io/Multi-Branch-Deploy/
-  ```
-
-
----
 
 ## 👨‍💻 Author
 
