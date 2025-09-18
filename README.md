@@ -1,10 +1,3 @@
-Got it 👍 Mai tumhare repo **Multi-Branch-Deploy** ke liye ek clean aur human-friendly **README.md** bana deta hoon.
-
----
-
-# 📄 README.md
-
-````markdown
 # 🚀 Multi-Branch Deploy (GitHub Pages + Actions)
 
 This repository demonstrates **Continuous Integration (CI)** and **Continuous Deployment (CD)** using **GitHub Actions** with multi-branch support.  
