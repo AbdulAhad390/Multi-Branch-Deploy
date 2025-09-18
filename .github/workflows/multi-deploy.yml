@@ -2,8 +2,8 @@ name: Multi-Branch Deploy (Pages)
 
 on:
   push:
-    branches: [main, dev] # CI/CD sirf main aur dev branches ke liye
-  pull_request: {} # PRs ke liye sirf CI chalega (deploy nahi)
+    branches: [main, dev] 
+  pull_request: {} 
 
 permissions:
   contents: read
@@ -24,7 +24,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci # clean reproducible install
+        run: run: npm install 
 
       - name: Run lint
         run: npm run lint --if-present
